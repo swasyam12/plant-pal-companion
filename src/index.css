@@ -49,10 +49,17 @@ All colors MUST be HSL.
     
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(145 85% 35%), hsl(120 70% 45%));
-    --gradient-background: linear-gradient(180deg, hsl(120 20% 98%), hsl(110 25% 96%));
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(120 15% 98%));
+    --gradient-background: linear-gradient(180deg, hsl(120 30% 95%), hsl(110 40% 90%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(120 30% 96%));
+    --gradient-cute: linear-gradient(135deg, hsl(120 50% 92%), hsl(145 40% 95%));
+    --gradient-button: linear-gradient(135deg, hsl(145 85% 35%), hsl(155 75% 40%));
+    
+    /* Cute shadows */
+    --shadow-cute: 0 8px 25px -5px hsl(145 85% 35% / 0.1);
+    --shadow-hover: 0 12px 35px -8px hsl(145 85% 35% / 0.15);
+    --shadow-soft: 0 4px 15px -3px hsl(120 20% 50% / 0.08);
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -116,6 +123,35 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-background via-accent/10 to-secondary/20 text-foreground min-h-screen;
+    background-attachment: fixed;
+  }
+  
+  /* Cute animations */
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+  
+  @keyframes pulse-cute {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-cute {
+    animation: pulse-cute 2s ease-in-out infinite;
   }
 }

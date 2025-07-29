@@ -39,79 +39,85 @@ const Index = () => {
   const overduePlants = plants.filter(plant => getWateringStatus(plant) === 'overdue').length;
 
   return (
-    <div className="min-h-screen bg-[var(--gradient-background)] p-4 md:p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen p-6">
+      <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-4xl">🌿</span>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-plant-healthy bg-clip-text text-transparent">
+        <div className="text-center space-y-6">
+          <div className="flex items-center justify-center gap-4">
+            <span className="text-5xl animate-float">🌿</span>
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-success to-plant-healthy bg-clip-text text-transparent">
               PlantPal
             </h1>
           </div>
-          <p className="text-lg text-muted-foreground max-w-md mx-auto">
-            Track, care for, and nurture your green companions
+          <p className="text-xl text-muted-foreground max-w-lg mx-auto font-medium">
+            Track, care for, and nurture your green companions 🌱
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-success mx-auto rounded-full"></div>
         </div>
 
         {/* Stats */}
         {plants.length > 0 && (
-          <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
-            <div className="text-center space-y-2">
+          <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+            <div className="text-center space-y-3 bg-gradient-to-br from-white to-accent/20 p-4 rounded-2xl shadow-cute">
               <div className="flex items-center justify-center">
-                <Badge className="bg-plant-healthy text-white">
-                  <Leaf className="h-3 w-3 mr-1" />
+                <Badge className="bg-plant-healthy text-white px-4 py-2 rounded-full shadow-sm">
+                  <Leaf className="h-4 w-4 mr-2" />
                   {healthyPlants}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground">Healthy</p>
+              <p className="text-sm text-muted-foreground font-medium">Healthy</p>
             </div>
             
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-3 bg-gradient-to-br from-white to-accent/20 p-4 rounded-2xl shadow-cute">
               <div className="flex items-center justify-center">
-                <Badge className="bg-plant-thirsty text-white">
-                  <Droplets className="h-3 w-3 mr-1" />
+                <Badge className="bg-plant-thirsty text-white px-4 py-2 rounded-full shadow-sm">
+                  <Droplets className="h-4 w-4 mr-2 animate-bounce-gentle" />
                   {thirstyPlants}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground">Thirsty</p>
+              <p className="text-sm text-muted-foreground font-medium">Thirsty</p>
             </div>
             
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-3 bg-gradient-to-br from-white to-accent/20 p-4 rounded-2xl shadow-cute">
               <div className="flex items-center justify-center">
-                <Badge className="bg-plant-overdue text-white">
-                  <AlertTriangle className="h-3 w-3 mr-1" />
+                <Badge className="bg-plant-overdue text-white px-4 py-2 rounded-full shadow-sm">
+                  <AlertTriangle className="h-4 w-4 mr-2 animate-pulse" />
                   {overduePlants}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground">Overdue</p>
+              <p className="text-sm text-muted-foreground font-medium">Overdue</p>
             </div>
           </div>
         )}
 
         {/* Plants Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {/* Add Plant Form */}
           <AddPlantForm onAddPlant={addPlant} />
           
           {/* Plant Cards */}
-          {plants.map((plant) => (
-            <PlantCard
-              key={plant.id}
-              plant={plant}
-              onWater={handleWaterPlant}
-              onDelete={handleDeletePlant}
-            />
+          {plants.map((plant, index) => (
+            <div 
+              key={plant.id} 
+              className="animate-fade-in" 
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <PlantCard
+                plant={plant}
+                onWater={handleWaterPlant}
+                onDelete={handleDeletePlant}
+              />
+            </div>
           ))}
         </div>
 
         {/* Empty State */}
         {plants.length === 0 && (
-          <div className="text-center py-12 space-y-4">
-            <div className="text-6xl mb-4">🌱</div>
-            <h2 className="text-2xl font-semibold text-foreground">Start Your Plant Journey</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Add your first plant to begin tracking watering schedules and keeping your green friends healthy!
+          <div className="text-center py-16 space-y-6 bg-gradient-to-br from-white via-accent/20 to-secondary/30 rounded-3xl shadow-cute mx-4">
+            <div className="text-8xl mb-6 animate-float">🌱</div>
+            <h2 className="text-3xl font-bold text-foreground bg-gradient-to-r from-primary to-success bg-clip-text text-transparent">Start Your Plant Journey</h2>
+            <p className="text-muted-foreground max-w-lg mx-auto text-lg font-medium">
+              Add your first plant to begin tracking watering schedules and keeping your green friends healthy! 🌿
             </p>
           </div>
         )}
